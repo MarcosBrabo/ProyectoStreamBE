@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+body {
+ 
+background: url('Componentes-pag-principal/imagenes/fondo2.png');
+color: aliceblue;
+   
+}
+
+.main-content {
+  text-align: center;
+  margin-top: 100px;
+}
+.main-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.main-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+.btn-custom {
+  background-color: #b5bcc7;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  margin: 10px;
+}

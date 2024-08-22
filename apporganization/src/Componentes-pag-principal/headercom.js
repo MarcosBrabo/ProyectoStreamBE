@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import bootstrap from 'bootstrap';
-import Linken from './imagenes/linken.png';;
-
+import Linken from './imagenes/linken.png';
+import Git  from './imagenes/git-hub.png';
+import Instagram  from './imagenes/ig.png';
+import Logo from './imagenes/logo.png';
 function HeaderCom() {  // Cambié el nombre de headercom a HeaderCom para seguir la convención de PascalCase para los componentes React
   return (
     <div>
@@ -21,17 +22,17 @@ function HeaderCom() {  // Cambié el nombre de headercom a HeaderCom para segui
                     <a class="nav-link" href="#"><img src={Linken} alt="LinkedIn" width="30"></img></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="link_to_instagram_icon" alt="Instagram" width="30"></img></a>
+                    <a class="nav-link" href="#"><img src={Instagram} alt="Instagram" width="30"></img></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="link_to_git_icon" alt="GitHub" width="30"></img></a>
+                    <a class="nav-link" href="#"><img src={Git} alt="GitHub" width="30"></img></a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container main-content">
-        <img src="link_to_book_icon" alt="Logo Notorium" width="100"></img>
+        <img src={Logo} alt="Logo Notorium" width="100"></img>
         <h1>Notorium</h1>
         <p>Organízate hoy, y hazte más productivo que ayer</p>
         <div>
