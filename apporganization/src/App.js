@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Headercom from './Componentes-pag-principal/headercom';
+import React from 'react';
+import HeaderCom from './Componentes-pag-principal/headercom'; // Asegúrate de que HeaderCom.js está en el directorio correcto y con el nombre correcto
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Headercom/>
+    <div>
+      <HeaderCom />
+      <Outlet />
     </div>
   );
 }

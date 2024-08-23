@@ -1,3 +1,14 @@
+/* General Styles */
+body {
+  background: url('Componentes-pag-principal/imagenes/fondo2.png') no-repeat center center fixed;
+  background-size: cover;
+  color: aliceblue;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* App Container */
 .App {
   text-align: center;
 }
@@ -21,11 +32,17 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #fff;
 }
 
 .App-link {
   color: #61dafb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.App-link:hover {
+  color: #21a1f1;
 }
 
 @keyframes App-logo-spin {
@@ -36,37 +53,43 @@
     transform: rotate(360deg);
   }
 }
-body {
- 
-background: url('Componentes-pag-principal/imagenes/fondo2.png');
-color: aliceblue;
-   
-}
 
+/* Main Content */
 .main-content {
   text-align: center;
   margin-top: 100px;
 }
+
 .main-content h1 {
   font-size: 3rem;
   margin-bottom: 20px;
 }
+
 .main-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
 }
+
 .btn-custom {
   background-color: #b5bcc7;
-  color: rgb(0, 0, 0);
+  color: #000;
   border: none;
   padding: 10px 30px;
   font-size: 1.2rem;
   margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.btn-custom:hover {
+  background-color: #a5acb7;
+  color: #333;
+}
 
+/* List Styles */
 ul {
   list-style: none;
+  padding: 0;
 }
 
 .example-2 {
