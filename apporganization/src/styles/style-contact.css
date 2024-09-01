@@ -1,0 +1,52 @@
+body {
+    height: 30hv;
+    font-family: 'Arial', sans-serif;
+}
+
+
+
+.card {
+    background-color: rgba(123, 160, 185, 0.575);
+    border-radius: 10px;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.form-label {
+    color: #d6dee6;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 0.5px solid #47a9fa;
+    font-size: 1.2rem;
+}
+.input-text1{
+background-color: #5e94f7;   
+font-weight: bold;
+
+}
+.input-text2{
+    background-color: #99baf7;   
+    
+
+}
+.input-text3{
+    background-color: #b9cdf3;  
+    font-size: 0.9rem;
+    font-weight: bold;
+    
+}
+
+
