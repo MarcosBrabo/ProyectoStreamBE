@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { Resend } from 'resend';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Linken from './imagenes/linken.png';
 import Git from './imagenes/git-hub.png';
@@ -29,7 +29,7 @@ function Contact() {
   };
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validación simple
@@ -38,20 +38,22 @@ function Contact() {
       return;
     }
 
-    // Obtener los reclamos actuales del localStorage
-    const existingClaims = JSON.parse(localStorage.getItem('claims')) || [];
 
-    // Agregar el nuevo reclamo
-    const updatedClaims = [...existingClaims, formData];
-
-    // Guardar los reclamos actualizados en el localStorage
-    localStorage.setItem('claims', JSON.stringify(updatedClaims));
-
-    // Limpiar el formulario y dar retroalimentación
-    setFormData({ email: '', name: '', message: '' });
-    setFeedback('Tu mensaje ha sido guardado exitosamente.');
+    const resend = new Resend('re_guLc93L9_FgY28VGCWNsptWb7bxzUghFZ');
+    try {
+      await resend.batch.send([
+        {
+          from: `Acme <${formData.email}>`,
+          to: ['gonzalofabiansendra@gmail.com'],
+          subject: formData.message,
+          html: `<h1>${formData.name}</h1>`,
+        },
+      ]);
+      setFeedback('Correo enviado exitosamente.');
+    } catch (error) {
+      setFeedback('Ocurrió un error al enviar el correo.');
+    }
   };
-
   return (
     <div>
       <div className="container mt-5" style={{ minHeight: '90vh' }}>
