@@ -59,8 +59,8 @@ function HeaderCom() {
         <h1>Notorium</h1>
         <p>Organízate hoy, y hazte más productivo que ayer</p>
         <div>
-          <a href="#" className="btn btn-custom">INICIAR</a>
-          <a href="#" className="btn btn-custom">REGISTRAR</a>
+        <Link to="/page/login" className="btn btn-custom">INICIAR</Link>
+        <Link to="/login" className="btn btn-custom">REGISTRAR</Link>
         </div>
       </div>
     </div>

@@ -17,27 +17,78 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1>Notorium</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="d-flex flex-column min-vh-100"> {/* Contenedor principal */}
+      <div className="login-container container my-auto"> {/* Container centrado verticalmente */}
+        <div className="row justify-content-center">
+          <div className="col-md-6 col-lg-4">
+            <div className="card shadow-lg">
+              <div className="card-header text-center bg-primary text-white">
+                Iniciar Sesión
+              </div>
+              <div className="card-body">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="username" className="form-label">Nombre de usuario</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="username"
+                      aria-describedby="usernameHelp"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <div id="usernameHelp" className="form-text">Ingrese su nombre de usuario.</div>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">Contraseña</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div id="usernameHelp" className="form-text">Ingrese su Contraseña</div>
+                  </div>
+                  <button type="submit" className="btn btn-primary w-100">Iniciar Sesión</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      </div>
+
+      <footer className="bg-dark text-light py-4 mt-auto"> {/* Footer siempre al fondo */}
+        <div className="container d-flex justify-content-between align-items-center">
+          <div>
+            <p className="mb-0">&copy; 1990-2025 Todos los derechos reservados</p>
+          </div>
+
+          <div>
+            <p className="mb-0">
+              <a href="mailto:correo@correo.com" className="text-light text-decoration-none">
+                correo@correo.com
+              </a>{' '}
+              |{' '}
+              <a href="tel:+543624000000" className="text-light text-decoration-none">
+                +54-3624-000000
+              </a>
+            </p>
+          </div>
+
+          <div className="d-flex">
+            <a href="https://linkedin.com" className="text-light mx-2" target="_blank" rel="noopener noreferrer">
+              <i className="bi bi-linkedin" style={{ fontSize: '1.5rem' }}></i>
+            </a>
+            <a href="https://instagram.com" className="text-light mx-2" target="_blank" rel="noopener noreferrer">
+              <i className="bi bi-instagram" style={{ fontSize: '1.5rem' }}></i>
+            </a>
+            <a href="https://github.com" className="text-light mx-2" target="_blank" rel="noopener noreferrer">
+              <i className="bi bi-github" style={{ fontSize: '1.5rem' }}></i>
+            </a>
+          </div>
         </div>
-        <button type="submit">Login</button>
-      </form>
+      </footer>
     </div>
   );
 };
