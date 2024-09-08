@@ -39,20 +39,23 @@ function Contact() {
     }
 
 
-    const resend = new Resend('re_guLc93L9_FgY28VGCWNsptWb7bxzUghFZ');
-    try {
-      await resend.batch.send([
-        {
-          from: `Acme <${formData.email}>`,
-          to: ['gonzalofabiansendra@gmail.com'],
-          subject: formData.message,
-          html: `<h1>${formData.name}</h1>`,
-        },
-      ]);
-      setFeedback('Correo enviado exitosamente.');
-    } catch (error) {
-      setFeedback('Ocurrió un error al enviar el correo.');
-    }
+    const resend = new Resend('re_47bTs4Ka_EFMSt554AnwwAcWcSPKwPCVj');
+
+    (async function () {
+      const { data, error } = await resend.emails.send({
+        from: 'Acme <${formData.email}>',
+        to: ['chuiuwu22@gmail.com'],
+        subject:  formData.message,
+        html: `<h1>${formData.name}</h1>`,
+      });
+      
+    
+      if (error) {
+        return console.error({ error });
+      }
+    
+      console.log({ data });
+    })();
   };
   return (
     <div>
