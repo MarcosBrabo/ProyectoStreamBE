@@ -12,21 +12,19 @@ function About() {
     <div className="about-container">
       <h2>Sobre Nosotros</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed vestibulum nunc, 
-        eget aliquam felis. Sed nunc purus, accumsan sit amet dictum in, ornare in dui. 
-        Ut imperdiet ante eros, sed porta ex eleifend ac. Donec non porttitor leo. 
-        Nulla luctus ex lacus, ut scelerisque odio semper nec. Vestibulum posuere eros 
-        quis felis viverra mattis. Ut turpis nunc, imperdiet a lorem nec, feugiat vulputate lectus.
+        Somos un grupo de 5 estudiantes con la idea de desarollar aplicaciones web que ayuden al crecimiento y cuidado personal de los individuos que decidan utilizarlas.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed vestibulum nunc, 
-        eget aliquam felis. Sed nunc purus, accumsan sit amet dictum in, ornare in dui. 
-        Ut imperdiet ante eros, sed porta ex eleifend ac. Donec non porttitor leo. 
-        Nulla luctus ex lacus, ut scelerisque odio semper nec. Vestibulum posuere eros 
-        quis felis viverra mattis. Ut turpis nunc, imperdiet a lorem nec, feugiat vulputate lectus.
       </p>
+      <div className="button-back">
+        <button onclick="goBack()">Ir a la página anterior</button>
+      </div>
     </div>
   );
+}
+
+function goBack() {
+    window.history.back();
 }
 
 export default About;

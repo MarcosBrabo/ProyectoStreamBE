@@ -9,6 +9,7 @@ import './../styles/style-contact.css';
 
 
 function Contact() {
+  
   // Estado para los campos del formulario
   const [formData, setFormData] = useState({
     email: '',
