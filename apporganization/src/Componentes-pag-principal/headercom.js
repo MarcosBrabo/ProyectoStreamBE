@@ -60,7 +60,7 @@ function HeaderCom() {
         <p>Organízate hoy, y hazte más productivo que ayer</p>
         <div>
         <Link to="/page/login" className="btn btn-custom">INICIAR</Link>
-        <Link to="/login" className="btn btn-custom">REGISTRAR</Link>
+        <Link to="/page/register" className="btn btn-custom">REGISTRAR</Link>
         </div>
       </div>
     </div>
