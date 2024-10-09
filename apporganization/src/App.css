@@ -117,7 +117,7 @@ ul {
 .example-2 .icon-content:hover .tooltip {
   opacity: 1;
   visibility: visible;
-  top: -50px;
+  top: 50px;
 }
 .example-2 .icon-content a {
   position: relative;
