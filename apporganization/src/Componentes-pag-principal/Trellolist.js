@@ -27,7 +27,6 @@ function Trellolist() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Load notes from localStorage when the component mounts
   useEffect(() => {
     const storedNotes = localStorage.getItem('notes');
     if (storedNotes) {
@@ -35,12 +34,10 @@ function Trellolist() {
     }
   }, []);
 
-  // Save notes to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
 
-  // Add a new note
   const addNote = () => {
     if (newNote.trim() === '') return;
     setNotes([
@@ -51,7 +48,6 @@ function Trellolist() {
     setIsModalOpen(false);
   };
 
-  // Reset fields for new note
   const resetNewNoteFields = () => {
     setNewNote('');
     setNewCategory('');
@@ -59,7 +55,6 @@ function Trellolist() {
     setNoteColor('#ffffff');
   };
 
-  // Add an item to a note
   const addItemToNote = (index) => {
     if (newItem.trim() === '') return;
     const updatedNotes = [...notes];
@@ -68,22 +63,24 @@ function Trellolist() {
     setNewItem('');
   };
 
-  // Toggle item completion
   const toggleItemCompletion = (noteIndex, itemIndex) => {
     const updatedNotes = [...notes];
     updatedNotes[noteIndex].items[itemIndex].completed = !updatedNotes[noteIndex].items[itemIndex].completed;
     setNotes(updatedNotes);
   };
 
-  // Determine if a color is dark or light
+  const deleteNote = (index) => {
+    const updatedNotes = notes.filter((_, noteIndex) => noteIndex !== index);
+    setNotes(updatedNotes);
+  };
+
   const isColorDark = (color) => {
     const hex = color.replace('#', '');
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
-    // Use the luminance formula to determine if the color is dark
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance < 0.5; // Returns true if the color is dark
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness < 128;
   };
 
   return (
@@ -111,7 +108,6 @@ function Trellolist() {
         Agregar Nota
       </Button>
 
-      {/* Modal for adding a new note */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box
           sx={{
@@ -166,18 +162,16 @@ function Trellolist() {
         </Box>
       </Modal>
 
-      {/* Display notes */}
       <Grid container spacing={2} style={{ marginTop: '20px' }}>
         {notes.map((note, index) => {
           const textColor = isColorDark(note.color) ? '#ffffff' : '#000000';
-
           return (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card style={{ backgroundColor: note.color || '#fff' }}>
-                <CardContent style={{ color: textColor }}>
-                  <Typography variant="h6" style={{ fontWeight: 'bold' }}>{note.title}</Typography>
-                  <Typography variant="subtitle2">Categoría: {note.category}</Typography>
-                  <Typography variant="subtitle2">Vence: {note.dueDate}</Typography>
+                <CardContent>
+                  <Typography variant="h6" style={{ fontWeight: 'bold', color: textColor }}>{note.title}</Typography>
+                  <Typography variant="subtitle2" style={{ color: textColor }}>Categoría: {note.category}</Typography>
+                  <Typography variant="subtitle2" style={{ color: textColor }}>Vence: {note.dueDate}</Typography>
                   <List>
                     {note.items.map((item, itemIndex) => (
                       <ListItem key={itemIndex}>
@@ -190,7 +184,7 @@ function Trellolist() {
                           primary={item.text}
                           style={{
                             textDecoration: item.completed ? 'line-through' : 'none',
-                            color: textColor,
+                            color: item.completed ? 'green' : textColor,
                           }}
                         />
                       </ListItem>
@@ -202,16 +196,26 @@ function Trellolist() {
                     fullWidth
                     value={newItem}
                     onChange={(e) => setNewItem(e.target.value)}
-                    style={{ marginTop: '10px', color:textColor }}
+                    style={{ marginTop: '10px', color: textColor }}
+                    inputProps={{ style: { color: textColor } }}
                   />
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={() => addItemToNote(index)}
                     fullWidth
-                    style={{ marginTop: '10px', color: textColor }}
+                    style={{ marginTop: '10px', backgroundColor: textColor === '#000000' ? '#ffffff' : '#000000', color: textColor }}
                   >
                     Agregar Ítem
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => deleteNote(index)}
+                    fullWidth
+                    style={{ marginTop: '10px', backgroundColor: '#d32f2f', color: '#ffffff' }}
+                  >
+                    Eliminar Nota
                   </Button>
                 </CardContent>
               </Card>
