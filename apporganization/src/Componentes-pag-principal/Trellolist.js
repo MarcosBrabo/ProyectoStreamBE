@@ -106,15 +106,20 @@ function Trellolist() {
             <button className="btn btn-outline-light">+ Nuevo</button>
             <button className="btn btn-outline-light">Explorar</button>
             <button className="btn btn-outline-light">Calendario</button>
-            <Link to="/" className="btn btn-custom">VOLVER A LA PANTALLA PRINCIPAL</Link>
+            <Link to="/" className="btn btn-outline-light">Volver a la Pantalla Principal</Link>
           </div>
         </div>
       </nav>
-
-      <Button variant="contained" color="primary" onClick={() => setIsModalOpen(true)}>
+      <br></br><br></br>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setIsModalOpen(true)}
+        style={{ display: 'block', margin: '0 auto' }}
+      >
         Agregar Nota
       </Button>
-
+      <br></br>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box
           sx={{
@@ -163,6 +168,7 @@ function Trellolist() {
             onChangeComplete={(color) => setNoteColor(color.hex)}
             style={{ marginBottom: '10px' }}
           />
+          <br></br>
           <Button variant="contained" color="primary" onClick={addNote} fullWidth>
             Agregar Nota
           </Button>
