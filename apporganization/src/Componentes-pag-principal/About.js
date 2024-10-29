@@ -18,7 +18,7 @@ function About() {
       <p>
       </p>
       <div className="button-back">
-        <Link to="/" className="btn btn-custom">INICIO</Link>
+        <button onclick="goBack()">Ir a la página anterior</button>
       </div>
     </div>
   );
