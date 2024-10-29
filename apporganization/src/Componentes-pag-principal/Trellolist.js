@@ -19,6 +19,7 @@ import Logo from './imagenes/logo.png';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CalendarComponent from './CalendarComponent'; // Importa el componente de calendario
+import { Link } from 'react-router-dom';
 
 
 function Trellolist() {
@@ -105,6 +106,7 @@ function Trellolist() {
             <button className="btn btn-outline-light">+ Nuevo</button>
             <button className="btn btn-outline-light">Explorar</button>
             <button className="btn btn-outline-light">Calendario</button>
+            <Link to="/" className="btn btn-custom">VOLVER A LA PANTALLA PRINCIPAL</Link>
           </div>
         </div>
       </nav>

@@ -6,6 +6,7 @@ import Git from './imagenes/git-hub.png';
 import Instagram from './imagenes/ig.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../styles/about.css';
+import { Link } from 'react-router-dom';
 
 function About() {
   return (
@@ -17,7 +18,7 @@ function About() {
       <p>
       </p>
       <div className="button-back">
-        <button onclick="goBack()">Ir a la página anterior</button>
+        <Link to="/" className="btn btn-custom">INICIO</Link>
       </div>
     </div>
   );
