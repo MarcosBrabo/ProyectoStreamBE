@@ -1,0 +1,59 @@
+/* Estilo general del calendario */
+.react-calendar {
+  font-family: Arial, sans-serif;
+  color: #333; /* Color de texto por defecto */
+  background-color: #fff; /* Color de fondo del calendario */
+  border: 1px solid #ddd; /* Borde del calendario */
+  border-radius: 8px;
+}
+
+/* Estilo para los nombres de los días de la semana (Lun, Mar, etc.) */
+.react-calendar__month-view__weekdays {
+  color: #0053a1; /* Color del texto de los días de la semana */
+  font-weight: bold;
+  background-color: #f0f0f0; /* Fondo de los días de la semana */
+}
+
+/* Estilo de las celdas de los días (números) */
+.react-calendar__tile {
+  color: #333; /* Color del texto de cada día */
+  background-color: #f9f9f9; /* Fondo de cada día */
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo cuando un día está seleccionado */
+.react-calendar__tile--active {
+  background-color: #5c5c5c; /* Fondo cuando está activo */
+  color: #fff; /* Texto cuando está activo */
+}
+
+/* Estilo cuando el día está enfocado al pasar el mouse */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #3d3d3d; /* Fondo al pasar el mouse */
+  color: #ff0909; /* Texto al pasar el mouse */
+}
+
+/* Estilo para los botones de navegación (anterior y siguiente) */
+.react-calendar__navigation__label,
+.react-calendar__navigation__arrow {
+  color: #000000; /* Color de los botones de navegación */
+}
+
+/* Cambia el estilo del texto del mes y año en la navegación */
+.react-calendar__navigation__label {
+  font-weight: bold;
+}
+
+/* Días que pertenecen al mes anterior o siguiente (en color gris claro) */
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #ff3f3f; /* Color para días de otros meses */
+}
+
+/* Estilo para el día de hoy */
+.react-calendar__tile--now {
+  background-color: #699ccc; /* Fondo para el día actual */
+  color: #000000; /* Color del texto para el día actual */
+  font-weight: bold;
+}

@@ -10,12 +10,16 @@ import {
   ListItem,
   Checkbox,
   ListItemText,
+  IconButton,
   Modal,
-  Box
+  Box,
 } from '@mui/material';
 import { ChromePicker } from 'react-color';
 import Logo from './imagenes/logo.png';
 import { useNavigate } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CalendarComponent from './CalendarComponent'; // Importa el componente de calendario
+
 
 function Trellolist() {
   const [notes, setNotes] = useState([]);
@@ -63,6 +67,12 @@ function Trellolist() {
     setNewItem('');
   };
 
+  const deleteItemFromNote = (noteIndex, itemIndex) => {
+    const updatedNotes = [...notes];
+    updatedNotes[noteIndex].items.splice(itemIndex, 1);
+    setNotes(updatedNotes);
+  };
+
   const toggleItemCompletion = (noteIndex, itemIndex) => {
     const updatedNotes = [...notes];
     updatedNotes[noteIndex].items[itemIndex].completed = !updatedNotes[noteIndex].items[itemIndex].completed;
@@ -85,24 +95,19 @@ function Trellolist() {
 
   return (
     <div>
-      <div>
-        <nav className="navbar navbar-expand-lg bg-black">
-          <div className="d-flex align-items-center justify-content-start" style={{ gap: '10px' }}>
-            <Button onClick={() => navigate('/')}>
-              <img src={Logo} alt="Logo Notorium" width="100" style={{ cursor: 'pointer' }} />
-              <h1 className="text-white mb-0" style={{ cursor: 'pointer', whiteSpace: 'nowrap', margin: 0 }}>Notorium</h1>
-            </Button>
-            <div className="ms-auto d-flex align-items-center" style={{ gap: '15px' }}>
-              <button className="btn btn-outline-light">+ Nuevo</button>
-              <button className="btn btn-outline-light">Explorar</button>
-              <button className="btn btn-outline-light">Calendario</button>
-            </div>
+      <nav className="navbar navbar-expand-lg bg-black">
+        <div className="d-flex align-items-center justify-content-start" style={{ gap: '10px' }}>
+          <Button onClick={() => navigate('/')}>
+            <img src={Logo} alt="Logo Notorium" width="100" style={{ cursor: 'pointer' }} />
+            <h1 className="text-white mb-0" style={{ cursor: 'pointer', whiteSpace: 'nowrap', margin: 0 }}>Notorium</h1>
+          </Button>
+          <div className="ms-auto d-flex align-items-center" style={{ gap: '15px' }}>
+            <button className="btn btn-outline-light">+ Nuevo</button>
+            <button className="btn btn-outline-light">Explorar</button>
+            <button className="btn btn-outline-light">Calendario</button>
           </div>
-        </nav>
-      </div>
-
-      <br />
-      <br />
+        </div>
+      </nav>
 
       <Button variant="contained" color="primary" onClick={() => setIsModalOpen(true)}>
         Agregar Nota
@@ -121,7 +126,7 @@ function Trellolist() {
             borderRadius: '10px',
           }}
         >
-          <Typography variant="h6" className='text-dark text-center' style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+          <Typography variant="h6" className="text-dark text-center" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
             Agregar nueva nota
           </Typography>
           <TextField
@@ -187,6 +192,9 @@ function Trellolist() {
                             color: item.completed ? 'green' : textColor,
                           }}
                         />
+                        <IconButton onClick={() => deleteItemFromNote(index, itemIndex)} edge="end" size="small">
+                          <DeleteIcon fontSize="small" style={{ color: textColor }} />
+                        </IconButton>
                       </ListItem>
                     ))}
                   </List>
@@ -204,7 +212,11 @@ function Trellolist() {
                     color="primary"
                     onClick={() => addItemToNote(index)}
                     fullWidth
-                    style={{ marginTop: '10px', backgroundColor: textColor === '#000000' ? '#ffffff' : '#000000', color: textColor }}
+                    style={{
+                      marginTop: '10px',
+                      backgroundColor: textColor === '#000000' ? '#ffffff' : '#000000',
+                      color: textColor,
+                    }}
                   >
                     Agregar Ítem
                   </Button>
@@ -223,6 +235,9 @@ function Trellolist() {
           );
         })}
       </Grid>
+
+      {/* Añadimos el componente de calendario */}
+      <CalendarComponent notes={notes} />
     </div>
   );
 }
