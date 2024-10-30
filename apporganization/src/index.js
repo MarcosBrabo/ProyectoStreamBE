@@ -9,6 +9,7 @@ import About from './Componentes-pag-principal/About';
 import Login from './page/login';
 import Register from './page/register';
 import Trellolist from './Componentes-pag-principal/Trellolist';
+import Plantillas from'./Componentes-pag-principal/plantillas'
 
 ReactDOM.render(
   <Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/page/login" element={<Login />} />
       <Route path="/page/register" element={<Register />} />
       <Route path="/trellolist" element={<Trellolist />} />
+      <Route path="/plantillas" element={<Plantillas />} />
       
     </Routes>
   </Router>,

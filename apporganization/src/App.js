@@ -3,6 +3,7 @@ import HeaderCom from './Componentes-pag-principal/headercom'; // Asegúrate de 
 import { Outlet } from 'react-router-dom';
 
 
+
 function App() {
   return (
     <div>
