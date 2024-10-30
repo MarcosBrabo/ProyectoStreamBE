@@ -4,3 +4,49 @@
     justify-content: start;
     gap: 10px;
   }
+  .Calendario{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    margin-top: 20px;
+    
+  }
+
+  .color2{
+    margin-top: 10px;
+    padding-top: 10px;
+    background-color: red !important;
+  }
+  ::-webkit-scrollbar{
+    
+    width: 100%;
+    height: 12px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  .note-card {
+    min-width: 300px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+  
+  .item-list {
+    max-height: 150px; /* Limita la altura máxima solo de la lista de ítems */
+    overflow-y: auto; /* Activa desplazamiento solo para la lista de ítems */
+    margin-bottom: 10px; /* Agrega un espacio inferior para los botones */
+  }
+  
+  .limited-list {
+    overflow-y: auto; /* Activa el desplazamiento vertical si se supera la altura */
+ 
+  }
+  
+  

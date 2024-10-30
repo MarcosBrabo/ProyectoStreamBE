@@ -4,7 +4,8 @@
   color: #333; /* Color de texto por defecto */
   background-color: #fff; /* Color de fondo del calendario */
   border: 1px solid #ddd; /* Borde del calendario */
-  border-radius: 8px;
+  border-radius: 10px;
+  width: 600px;
 }
 
 /* Estilo para los nombres de los días de la semana (Lun, Mar, etc.) */

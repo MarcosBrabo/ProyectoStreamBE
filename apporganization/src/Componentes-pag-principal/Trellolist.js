@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Grid,
   List,
   ListItem,
   Checkbox,
@@ -18,14 +17,14 @@ import { ChromePicker } from 'react-color';
 import Logo from './imagenes/logo.png';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CalendarComponent from './CalendarComponent'; // Importa el componente de calendario
+import CalendarComponent from './CalendarComponent';
 import { Link } from 'react-router-dom';
-
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import '../styles/trello.css';
 
 function Trellolist() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
-  const [newItem, setNewItem] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [newDueDate, setNewDueDate] = useState('');
   const [noteColor, setNoteColor] = useState('#ffffff');
@@ -47,7 +46,14 @@ function Trellolist() {
     if (newNote.trim() === '') return;
     setNotes([
       ...notes,
-      { title: newNote, items: [], category: newCategory, dueDate: newDueDate, color: noteColor },
+      {
+        title: newNote,
+        items: [],
+        newItem: '',  // Agrega un campo newItem para cada nota
+        category: newCategory,
+        dueDate: newDueDate,
+        color: noteColor,
+      },
     ]);
     resetNewNoteFields();
     setIsModalOpen(false);
@@ -60,12 +66,21 @@ function Trellolist() {
     setNoteColor('#ffffff');
   };
 
-  const addItemToNote = (index) => {
-    if (newItem.trim() === '') return;
+  const handleNewItemChange = (index, value) => {
     const updatedNotes = [...notes];
-    updatedNotes[index].items.push({ text: newItem, completed: false });
+    updatedNotes[index].newItem = value;
     setNotes(updatedNotes);
-    setNewItem('');
+  };
+
+  const addItemToNote = (index) => {
+    const updatedNotes = [...notes];
+    const newItemText = updatedNotes[index].newItem.trim();
+
+    if (newItemText === '') return;
+
+    updatedNotes[index].items.push({ text: newItemText, completed: false });
+    updatedNotes[index].newItem = '';  // Limpia el newItem de esta nota
+    setNotes(updatedNotes);
   };
 
   const deleteItemFromNote = (noteIndex, itemIndex) => {
@@ -85,17 +100,17 @@ function Trellolist() {
     setNotes(updatedNotes);
   };
 
-  const isColorDark = (color) => {
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    return brightness < 128;
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+    const reorderedNotes = Array.from(notes);
+    const [movedNote] = reorderedNotes.splice(result.source.index, 1);
+    reorderedNotes.splice(result.destination.index, 0, movedNote);
+    setNotes(reorderedNotes);
   };
 
   return (
     <div>
+      {/* Navbar */}
       <nav className="navbar navbar-expand-lg bg-black">
         <div className="d-flex align-items-center justify-content-start" style={{ gap: '10px' }}>
           <Button onClick={() => navigate('/')}>
@@ -110,7 +125,9 @@ function Trellolist() {
           </div>
         </div>
       </nav>
-      <br></br><br></br>
+      <br />
+      
+      {/* Botón para abrir el modal */}
       <Button
         variant="contained"
         color="primary"
@@ -119,7 +136,9 @@ function Trellolist() {
       >
         Agregar Nota
       </Button>
-      <br></br>
+      <br />
+
+      {/* Modal para agregar nueva nota */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box
           sx={{
@@ -160,92 +179,96 @@ function Trellolist() {
             onChange={(e) => setNewDueDate(e.target.value)}
             style={{ marginBottom: '10px' }}
           />
-          <Typography variant="h6" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-            Color de la Nota
-          </Typography>
           <ChromePicker
             color={noteColor}
             onChangeComplete={(color) => setNoteColor(color.hex)}
             style={{ marginBottom: '10px' }}
           />
-          <br></br>
           <Button variant="contained" color="primary" onClick={addNote} fullWidth>
             Agregar Nota
           </Button>
         </Box>
       </Modal>
 
-      <Grid container spacing={2} style={{ marginTop: '20px' }}>
-        {notes.map((note, index) => {
-          const textColor = isColorDark(note.color) ? '#ffffff' : '#000000';
-          return (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card style={{ backgroundColor: note.color || '#fff' }}>
-                <CardContent>
-                  <Typography variant="h6" style={{ fontWeight: 'bold', color: textColor }}>{note.title}</Typography>
-                  <Typography variant="subtitle2" style={{ color: textColor }}>Categoría: {note.category}</Typography>
-                  <Typography variant="subtitle2" style={{ color: textColor }}>Vence: {note.dueDate}</Typography>
-                  <List>
-                    {note.items.map((item, itemIndex) => (
-                      <ListItem key={itemIndex}>
-                        <Checkbox
-                          checked={item.completed}
-                          onChange={() => toggleItemCompletion(index, itemIndex)}
-                          style={{ color: textColor }}
+      {/* Notas con Drag and Drop */}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable direction="horizontal" droppableId="notes" type="NOTE">
+          {(provided) => (
+            <div
+              className="notes-container"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              style={{ display: 'flex', overflowX: 'auto', padding: '20px', gap: '15px' }}
+            >
+              {notes.map((note, index) => (
+                <Draggable key={index} draggableId={`note-${index}`} index={index}>
+                  {(provided) => (
+                    <Card className='note-card'
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        minWidth: '300px',
+                        backgroundColor: note.color || '#fff',
+                        ...provided.draggableProps.style,
+                      }}
+                    >
+                      <CardContent>
+                        <Typography variant="h6" style={{ fontWeight: 'bold' }}>{note.title}</Typography>
+                        <Typography variant="subtitle2">Categoría: {note.category}</Typography>
+                        <Typography variant="subtitle2">Vence: {note.dueDate}</Typography>
+                        <List className='item-list'>
+                          {note.items.map((item, itemIndex) => (
+                            <ListItem key={itemIndex}>
+                              <Checkbox
+                                checked={item.completed}
+                                onChange={() => toggleItemCompletion(index, itemIndex)}
+                              />
+                              <ListItemText primary={item.text} />
+                              <IconButton onClick={() => deleteItemFromNote(index, itemIndex)} edge="end" size="small">
+                                <DeleteIcon fontSize="small" />
+                              </IconButton>
+                            </ListItem>
+                          ))}
+                        </List>
+                        <TextField
+                          label="Agregar ítem"
+                          variant="outlined"
+                          fullWidth
+                          value={note.newItem}
+                          onChange={(e) => handleNewItemChange(index, e.target.value)}
+                          style={{ marginTop: '10px' }}
                         />
-                        <ListItemText
-                          primary={item.text}
-                          style={{
-                            textDecoration: item.completed ? 'line-through' : 'none',
-                            color: item.completed ? 'green' : textColor,
-                          }}
-                        />
-                        <IconButton onClick={() => deleteItemFromNote(index, itemIndex)} edge="end" size="small">
-                          <DeleteIcon fontSize="small" style={{ color: textColor }} />
-                        </IconButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                  <TextField
-                    label="Agregar ítem"
-                    variant="outlined"
-                    fullWidth
-                    value={newItem}
-                    onChange={(e) => setNewItem(e.target.value)}
-                    style={{ marginTop: '10px', color: textColor }}
-                    inputProps={{ style: { color: textColor } }}
-                  />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => addItemToNote(index)}
-                    fullWidth
-                    style={{
-                      marginTop: '10px',
-                      backgroundColor: textColor === '#000000' ? '#ffffff' : '#000000',
-                      color: textColor,
-                    }}
-                  >
-                    Agregar Ítem
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => deleteNote(index)}
-                    fullWidth
-                    style={{ marginTop: '10px', backgroundColor: '#d32f2f', color: '#ffffff' }}
-                  >
-                    Eliminar Nota
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          );
-        })}
-      </Grid>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => addItemToNote(index)}
+                          fullWidth
+                        >
+                          Agregar Ítem
+                        </Button>
+                        <Button
+                          variant="contained"
+                          className="color2"
+                          onClick={() => deleteNote(index)}
+                          fullWidth
+                        >
+                          Eliminar Nota
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
-      {/* Añadimos el componente de calendario */}
-      <CalendarComponent notes={notes} />
+      <div className="Calendario">
+        <CalendarComponent notes={notes} />
+      </div>
     </div>
   );
 }
