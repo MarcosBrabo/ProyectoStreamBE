@@ -1,0 +1,101 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    font-family: Arial, sans-serif;
+    background-color: #002b5b; /* Dark blue background */
+    color: white;
+}
+  
+.page-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+  /* Header */
+.header {
+    width: 100%;
+    background-color: #004a89; /* Slightly lighter blue */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+  }
+  
+.header h1 {
+    margin: 0;
+  }
+  
+.new-button, .logout-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+  
+.new-button:hover, .logout-button:hover {
+    text-decoration: underline;
+  }
+  
+  /* Plantillas List */
+.plantillas-container {
+    margin-top: 20px;
+    width: 80%;
+}
+  
+.plantilla {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #005bb5; /* Light blue background for templates */
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: white;
+}
+  
+.plantilla:hover {
+    background-color: #0073e6;
+}
+  
+.delete-button {
+    background: none;
+    border: none;
+    color: #ff4d4d; /* Red color for delete icon */
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    color: #ff6666;
+}
+
+  /* Calendar Container */
+.calendar-container {
+    margin-top: 30px;
+}
+
+.calendar {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+}
+
+  /* Time Display */
+.time-display {
+    margin-top: auto;
+    background-color: #005bb5;
+    padding: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
