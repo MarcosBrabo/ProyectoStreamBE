@@ -48,5 +48,24 @@
     overflow-y: auto; /* Activa el desplazamiento vertical si se supera la altura */
  
   }
+  .container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .note-card, .calendar {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .separator {
+    border-left: 2px solid #ccc;
+    height: 100%;
+    margin: 0 20px;
+  }
+  
   
   
