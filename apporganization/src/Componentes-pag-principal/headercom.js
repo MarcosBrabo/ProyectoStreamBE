@@ -62,7 +62,7 @@ function HeaderCom() {
         <div>
         <Link to="/page/login" className="btn btn-custom">INICIAR</Link>
         <Link to="/page/register" className="btn btn-custom">REGISTRAR</Link>
-        <Link to="/trellolist" className="btn btn-custom">INICIAR SIN CUENTA</Link>
+        <Link to="/plantillas" className="btn btn-custom">INICIAR SIN CUENTA</Link>
         </div>
       </div>
     </div>

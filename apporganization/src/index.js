@@ -19,8 +19,9 @@ ReactDOM.render(
       <Route path="/about" element={<About />} />
       <Route path="/page/login" element={<Login />} />
       <Route path="/page/register" element={<Register />} />
-      <Route path="/trellolist" element={<Trellolist />} />
       <Route path="/plantillas" element={<Plantillas />} />
+      <Route path="/plantillas/:plantillaId" element={<Trellolist />} />
+
       
     </Routes>
   </Router>,

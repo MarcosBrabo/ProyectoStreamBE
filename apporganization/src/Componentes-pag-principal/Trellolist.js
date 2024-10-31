@@ -8,21 +8,21 @@ import {
   List,
   ListItem,
   Checkbox,
-  ListItemText,
+  ListItemText, // Añadido para corregir el error
   IconButton,
   Modal,
   Box,
 } from '@mui/material';
 import { ChromePicker } from 'react-color';
-import Logo from './imagenes/logo.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link ,useParams } from 'react-router-dom'; // Añadido Link para corregir el error
 import DeleteIcon from '@mui/icons-material/Delete';
-import CalendarComponent from './CalendarComponent';
-import { Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Logo from './imagenes/logo.png'; // Añadido para corregir el error de Logo
+import CalendarComponent from './CalendarComponent'; // Añadido para corregir el error de CalendarComponent
 import '../styles/trello.css';
 
 function Trellolist() {
+  const { plantillaId } = useParams(); // Obtener plantillaId desde la URL
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
   const [newCategory, setNewCategory] = useState('');
@@ -31,16 +31,18 @@ function Trellolist() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Cargar notas específicas de la plantilla desde localStorage
   useEffect(() => {
-    const storedNotes = localStorage.getItem('notes');
+    const storedNotes = localStorage.getItem(`notes_${plantillaId}`);
     if (storedNotes) {
       setNotes(JSON.parse(storedNotes));
     }
-  }, []);
+  }, [plantillaId]);
 
+  // Guardar notas específicas de la plantilla en localStorage
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
+    localStorage.setItem(`notes_${plantillaId}`, JSON.stringify(notes));
+  }, [notes, plantillaId]);
 
   const addNote = () => {
     if (newNote.trim() === '') return;
@@ -49,7 +51,7 @@ function Trellolist() {
       {
         title: newNote,
         items: [],
-        newItem: '',  // Agrega un campo newItem para cada nota
+        newItem: '',
         category: newCategory,
         dueDate: newDueDate,
         color: noteColor,
@@ -75,11 +77,9 @@ function Trellolist() {
   const addItemToNote = (index) => {
     const updatedNotes = [...notes];
     const newItemText = updatedNotes[index].newItem.trim();
-
     if (newItemText === '') return;
-
     updatedNotes[index].items.push({ text: newItemText, completed: false });
-    updatedNotes[index].newItem = '';  // Limpia el newItem de esta nota
+    updatedNotes[index].newItem = '';
     setNotes(updatedNotes);
   };
 
@@ -118,10 +118,9 @@ function Trellolist() {
             <h1 className="text-white mb-0" style={{ cursor: 'pointer', whiteSpace: 'nowrap', margin: 0 }}>Notorium</h1>
           </Button>
           <div className="ms-auto d-flex align-items-center" style={{ gap: '15px' }}>
-            <button className="btn btn-outline-light">+ Nuevo</button>
-            <button className="btn btn-outline-light">Explorar</button>
-            <button className="btn btn-outline-light">Calendario</button>
-            <Link to="/" className="btn btn-outline-light">Volver a la Pantalla Principal</Link>
+          <Link to="/plantillas" className="btn btn-outline-light">+ Nuevo</Link>
+          <Link to="/plantillas" className="btn btn-outline-light">+ Explorar</Link>
+        
           </div>
         </div>
       </nav>
