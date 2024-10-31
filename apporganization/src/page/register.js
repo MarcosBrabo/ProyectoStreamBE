@@ -21,7 +21,7 @@ const Register = () => {
       <div className="login-container container my-auto"> {/* Container centrado verticalmente */}
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4">
-            <div className="card shadow-lg">
+            <div className="card shadow-lg" style={{ width: '800px' }}>
               <div className="card-header text-center bg-primary text-white">
                 Registrarse
               </div>
