@@ -3,7 +3,7 @@
   font-family: Arial, sans-serif;
   color: #333; /* Color de texto por defecto */
   background-color: #fff; /* Color de fondo del calendario */
-  border: 1px solid #ddd; /* Borde del calendario */
+  border: 1px solid #0a0a0a; /* Borde del calendario */
   border-radius: 10px;
   width: 600px;
 }

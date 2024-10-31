@@ -30,6 +30,44 @@
   transition: transform 0.3s ease; 
 }
 .container-fluid .btn-custom:hover::before {
+  transform: scaleX(1) ; /* Expandir el borde inferior */
+}
+
+
+
+
+.container-fluid .btn-custom {
+  background-color: transparent; 
+  border: none; 
+  color: white; 
+  padding: 10px 20px; 
+  text-transform: uppercase; 
+  text-align: center; 
+  font-size: 16px; 
+  font-weight: bold; 
+  position: relative; 
+  display: inline-block;
+  transition: all 0.5s ease; 
+}
+
+/* Efecto hover */
+.container-fluid .btn-custom:hover {
+  color: #014694; 
+}
+
+/* Asegurarse que el borde esté alineado correctamente */
+.container-fluid .btn-custom::before {
+  content: ''; 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #014694; 
+  transform: scaleX(0);
+  transition: transform 0.3s ease; 
+}
+.container-fluid .btn-custom:hover::before {
   transform: scaleX(1); /* Expandir el borde inferior */
 }
 
@@ -158,7 +196,16 @@ ul {
 
 .example-2 .icon-content a[data-social="instagram"] .filled,
 .example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
-  background: linear-gradient(45deg, #405de6, #5b51db, #b33ab4, #c135b4, #e1306c, #fd1f1f);
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5b51db,
+    #b33ab4,
+    #c135b4,
+    #e1306c,
+    #fd1f1f
+  );
+
 }
 
 .example-2 .icon-content a[data-social="youtube"] .filled,
@@ -238,4 +285,78 @@ button:hover {
 
 .note-card button {
   margin: 5px;
+}
+
+
+/* main-container will center everything horizontally and vertically */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Adjust background color as needed */
+}
+
+/* main-content centers the content */
+.main-content {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 150px; /* Adjust the size of the logo as needed */
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ffffff; /* Adjust text color as needed */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between buttons */
+}
+
+.btn-custom {
+ background-color: #0964cc;
+  border: none; 
+  color: rgb(0, 0, 0); 
+  padding: 10px 20px; 
+  text-transform: uppercase; 
+  font-size: 16px; 
+  font-weight: bold; 
+  position: relative; 
+  display: inline-block;
+  transition: all 0.5s ease; 
+}
+
+/* Efecto hover */
+.btn-custom:hover {
+  color: #014694; 
+}
+
+.btn-custom::before {
+  content: ''; 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #014694; 
+  transform: scaleX(0);
+  transition: transform 0.3s ease; 
+}
+
+.btn-custom:hover::before {
+  transform: scaleX(1); /* Expand border on hover */
 }

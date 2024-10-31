@@ -60,7 +60,7 @@ function Contact() {
   };
   return (
     <div>
-      <div className="container mt-5" style={{ minHeight: '90vh' }}>
+      <div className="container mt-3" style={{ minHeight: '90vh' }}>
         <div className="card p-4">
           <h1 className="text-center mb-4">CONTÁCTANOS</h1>
           <form onSubmit={handleSubmit}>

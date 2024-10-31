@@ -123,15 +123,15 @@ function Trellolist() {
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg bg-black">
+      <nav className="navbar navbar-expand-lg bg-black custom-navbar">
         <div className="d-flex align-items-center justify-content-start" style={{ gap: '10px' }}>
           <Button onClick={() => navigate('/')}>
             <img src={Logo} alt="Logo Notorium" width="100" style={{ cursor: 'pointer' }} />
             <h1 className="text-white mb-0" style={{ cursor: 'pointer', whiteSpace: 'nowrap', margin: 0 }}>Notorium</h1>
           </Button>
           <div className="ms-auto d-flex align-items-center" style={{ gap: '15px' }}>
-            <Link to="/plantillas" className="btn btn-outline-light">+ Nuevo</Link>
-            <Link to="/plantillas" className="btn btn-outline-light">+ Explorar</Link>
+            <Link to="/plantillas" className="btn btn-outline-light boton-trello">+ Nuevo</Link>
+            <Link to="/plantillas" className="btn btn-outline-light boton-trello">+ Explorar</Link>
           </div>
         </div>
       </nav>
@@ -309,11 +309,12 @@ function Trellolist() {
           </DragDropContext>
         </div>
 
-        {/* Componente del calendario */}
-        <div style={{ width: '300px' }}>
+       
+      </div>
+               {/* Componente del calendario */}
+        <div className='Calendario'>
           <CalendarComponent notes={notes} />
         </div>
-      </div>
     </div>
   );
 }

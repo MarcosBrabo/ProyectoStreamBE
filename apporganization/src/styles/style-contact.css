@@ -1,5 +1,5 @@
 body {
-    height: 30hv;
+    height:10dvh;
     font-family: 'Arial', sans-serif;
 }
 
@@ -8,6 +8,7 @@ body {
 .card {
     background-color: rgba(123, 160, 185, 0.575);
     border-radius: 10px;
+    width: 100%;
 }
 
 h1 {
@@ -38,15 +39,22 @@ font-weight: bold;
 
 }
 .input-text2{
-    background-color: #000000;   
+    background-color: #7aa9ff;   
     
 
 }
 .input-text3{
-    background-color: #000000;  
+    background-color: #88aef5;  
     font-size: 0.9rem;
     font-weight: bold;
     
 }
-
-
+.btn{
+    width: 250px;
+    border-radius: 10px;
+    background-color: #47a9fa;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}

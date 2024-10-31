@@ -13,6 +13,17 @@ function Plantillas() {
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
 
+  // Estado para la fecha y hora en tiempo real
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // Actualiza cada segundo
+
+    return () => clearInterval(timer); // Limpia el intervalo al desmontar el componente
+  }, []);
+
   useEffect(() => {
     const storedPlantillas = JSON.parse(localStorage.getItem('plantillas')) || [];
     setPlantillas(storedPlantillas);
@@ -39,6 +50,11 @@ function Plantillas() {
     navigate(`/plantillas/${plantillaId}`);
   };
 
+  // Formato de la fecha y hora
+  const formattedDate = currentTime.toLocaleDateString();
+  const formattedTime = currentTime.toLocaleTimeString();
+  const formattedDay = currentTime.toLocaleDateString('es-ES', { weekday: 'long' });
+
   return (
     <div className="page-container">
       <nav className="navbar">
@@ -52,42 +68,49 @@ function Plantillas() {
 
       <h1>Plantillas</h1>
 
-      <div className="plantillas-container">
-        {plantillas.map((plantilla) => (
-          <div
-            key={plantilla.id}
-            className="plantilla"
-            onClick={() => handlePlantillaClick(plantilla.id)}
-          >
-            <span>{plantilla.name}</span>
-            <IconButton
-              className="delete-button"
-              onClick={(e) => { e.stopPropagation(); handleDelete(plantilla.id); }}
-              aria-label="delete"
-              size="small"
-            >
-              <DeleteIcon style={{ color: 'white' }} />
-            </IconButton>
-          </div>
-        ))}
-        <button onClick={() => setShowCreateForm(!showCreateForm)}>
-          Crear Nueva Plantilla
-        </button>
+      <div className="layout-container">
+        <div className="plantillas-section">
+          <div className="plantillas-container">
+            {plantillas.map((plantilla) => (
+              <div
+                key={plantilla.id}
+                className="plantilla"
+                onClick={() => handlePlantillaClick(plantilla.id)}
+              >
+                <span>{plantilla.name}</span>
+                <IconButton
+                  className="delete-button"
+                  onClick={(e) => { e.stopPropagation(); handleDelete(plantilla.id); }}
+                  aria-label="delete"
+                  size="small"
+                >
+                  <DeleteIcon style={{ color: 'white' }} />
+                </IconButton>
+              </div>
+            ))}
+            <button onClick={() => setShowCreateForm(!showCreateForm)}>
+              Crear Nueva Plantilla
+            </button>
 
-        {showCreateForm && (
-          <div className="create-form">
-            <input
-              type="text"
-              value={newPlantillaName}
-              onChange={(e) => setNewPlantillaName(e.target.value)}
-              placeholder="Nombre de la plantilla"
-            />
-            <button onClick={handleCreatePlantilla}>Guardar</button>
+            {showCreateForm && (
+              <div className="create-form">
+                <input
+                  type="text"
+                  value={newPlantillaName}
+                  onChange={(e) => setNewPlantillaName(e.target.value)}
+                  placeholder="Nombre de la plantilla"
+                />
+                <button onClick={handleCreatePlantilla}>Guardar</button>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
-        <div className="calendar-container">
+        <div className="calendar-section">
           <CalendarComponent notes={notes} />
+          <div className="time-info">
+            <p>{formattedDay} -    {formattedDate}  -  {formattedTime}</p>
+          </div>
         </div>
       </div>
     </div>
